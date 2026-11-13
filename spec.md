@@ -100,7 +100,7 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 
 **Kịch bản minh họa.** KB08 — Học viên đề nghị đăng lời giải chưa được xác minh lên FAQ.
 
-**Công cụ & file chạy thử.** HTML/CSS/JS tương tác trực tiếp ([`prototype/index.html`](prototype/index.html)) và Figma Code Layer ([Mở Figma Prototype](https://www.figma.com/design/zFCwtfc2zJHnhL8XWVDWm6?node-id=1-3&autoplay-code-preview=1-3&code-import-attempt-id=9f9d4aa424a2b495ff25e24fa551dff37903f2a2c0cc5d8e2f6bfd5beda58b52&code-import-node-id=1-3&code-import-surface=code_layer)). Hai màn hình mô phỏng vai học viên và trợ giảng bằng dữ liệu giả (mock state machine, không gọi AI thật mặc định).
+**Công cụ & file chạy thử.** HTML/CSS/JS tương tác trực tiếp ([`prototype/index.html`](prototype/index.html)). Hai màn hình mô phỏng vai học viên và trợ giảng bằng dữ liệu giả (mock state machine, không gọi AI thật mặc định).
 
 | Ký hiệu trên ảnh | Chi tiết trên giao diện | Ý nghĩa |
 |---|---|---|

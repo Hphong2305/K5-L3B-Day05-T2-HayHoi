@@ -4,7 +4,6 @@ Prototype tập trung vào kịch bản khó nhất **KB08 (Học viên yêu c�
 
 ## Cách xem và chạy thử
 - **Chạy trực tiếp trên trình duyệt:** Mở file [`index.html`](index.html) bằng Chrome/Safari/Edge.
-- **Xem trên Figma (Code Layer):** [Mở file Figma K5-L3B-Day05-T2-HayHoi Prototype](https://www.figma.com/design/zFCwtfc2zJHnhL8XWVDWm6?node-id=1-3&autoplay-code-preview=1-3&code-import-attempt-id=9f9d4aa424a2b495ff25e24fa551dff37903f2a2c0cc5d8e2f6bfd5beda58b52&code-import-node-id=1-3&code-import-surface=code_layer) *(nếu Figma vừa cập nhật `index.html` ở local, có thể re-import hoặc mở trực tiếp `index.html` trên trình duyệt khi demo)*.
 
 ## Ảnh màn hình đánh số (dùng trong `spec.md` §5)
 ![Prototype KB08 — 1. Học viên và 2. Trợ giảng](kb08-prototype.png)

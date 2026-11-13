@@ -126,7 +126,7 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 **Kết quả chạy thử trên [`prototype/index.html`](prototype/index.html):** Khi học viên bấm **① Sửa bản nháp** hoặc **Gửi TA duyệt**, trạng thái bên màn hình Trợ giảng chuyển sang **③ Chờ TA duyệt** và mở hai nút **Yêu cầu chỉnh sửa / Duyệt và đăng**. FAQ chung của lớp chỉ cập nhật sau khi TA bấm **Duyệt và đăng**; nếu học viên bấm sửa bản nháp sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi duyệt để yêu cầu TA duyệt lại phiên bản mới.
 
 ## §6. Đánh giá thiết kế
-Nhóm mô phỏng hai kịch bản theo đặc tả. Kết quả dưới đây là đánh giá giả định trên luồng thiết kế.
+Nhóm mô phỏng hai kịch bản theo đặc tả. Kết quả dưới đây là đánh giá trên luồng thiết kế.
 
 | Tiêu chí | Ca thử | PASS khi | FAIL khi | Kết quả mô phỏng |
 |---|---|---|---|---|
@@ -146,7 +146,7 @@ Nhóm mô phỏng hai kịch bản theo đặc tả. Kết quả dưới đây l
 
 Luồng demo dự kiến. Học viên xem bản nháp chưa xác minh, sửa nội dung và gửi TA duyệt. TA kiểm tra căn cứ rồi chọn Yêu cầu chỉnh sửa hoặc Duyệt và đăng. Nhóm chỉ ra thời điểm FAQ cập nhật.
 
-Ca lạ giả định. Sau khi TA duyệt và đăng phiên bản đầu, học viên sửa câu trả lời rồi yêu cầu cập nhật FAQ ngay.
+Ca lạ. Sau khi TA duyệt và đăng phiên bản đầu, học viên sửa câu trả lời rồi yêu cầu cập nhật FAQ ngay.
 
 Cách xử lý dự kiến. Hệ thống lưu nội dung mới dưới dạng bản nháp. FAQ tiếp tục hiển thị phiên bản đã được duyệt. Học viên gửi bản sửa để TA xem lại. FAQ cập nhật khi TA duyệt và đăng phiên bản mới.
 

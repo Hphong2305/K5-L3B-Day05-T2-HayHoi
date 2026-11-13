@@ -100,7 +100,7 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 
 **Kịch bản minh họa.** KB08 — Học viên đề nghị đăng lời giải chưa được xác minh lên FAQ.
 
-**Công cụ dự kiến.** Figma. Hai màn hình mô phỏng vai học viên và trợ giảng bằng dữ liệu giả. [Bổ sung link prototype sau khi nối nút và kiểm tra quyền xem.]
+**Công cụ & file chạy thử.** HTML/CSS/JS tương tác trực tiếp ([`prototype/index.html`](prototype/index.html)) và Figma Code Layer ([Mở Figma Prototype](https://www.figma.com/design/zFCwtfc2zJHnhL8XWVDWm6?node-id=1-3&autoplay-code-preview=1-3&code-import-attempt-id=9f9d4aa424a2b495ff25e24fa551dff37903f2a2c0cc5d8e2f6bfd5beda58b52&code-import-node-id=1-3&code-import-surface=code_layer)). Hai màn hình mô phỏng vai học viên và trợ giảng bằng dữ liệu giả (mock state machine, không gọi AI thật mặc định).
 
 | Ký hiệu trên ảnh | Chi tiết trên giao diện | Ý nghĩa |
 |---|---|---|
@@ -110,7 +110,9 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 
 Học viên xem hoặc sửa bản nháp rồi chọn **Gửi TA duyệt**. TA có thể **Yêu cầu chỉnh sửa** hoặc **Duyệt và đăng** sau khi kiểm tra nội dung. Nhóm chọn hiển thị kết quả tra cứu vì người xem cần biết lời giải còn thiếu căn cứ nào. Bước duyệt giới hạn quyền đăng nội dung ảnh hưởng đến cả lớp.
 
-[Thêm ảnh đánh số của prototype và ghi nhận kết quả chạy thử.]
+![Prototype KB08 — 1. Học viên và 2. Trợ giảng](prototype/kb08-prototype.jpg)
+
+**Kết quả chạy thử trên [`prototype/index.html`](prototype/index.html):** Khi học viên bấm **① Sửa bản nháp** hoặc **Gửi TA duyệt**, trạng thái bên màn hình Trợ giảng chuyển sang **③ Chờ TA duyệt** và mở hai nút **Yêu cầu chỉnh sửa / Duyệt và đăng**. FAQ chung của lớp chỉ cập nhật sau khi TA bấm **Duyệt và đăng**; nếu học viên bấm sửa bản nháp sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi duyệt để yêu cầu TA duyệt lại phiên bản mới.
 
 ## §6. Tiêu chí đánh giá
 

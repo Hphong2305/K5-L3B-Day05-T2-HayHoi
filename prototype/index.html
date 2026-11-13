@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype KB08 · Hệ thống học tập · Nhóm HayHoi (T2)</title>
+  <style>
+    :root {
+      --page-bg: #f6f8fc;
+      --frame-bg: #ffffff;
+      --topbar-bg: #eef4fb;
+      --sidebar-bg: #f4f7fc;
+      --border: #d7e0ec;
+      --navy: #0e2240;
+      --text: #1c2b45;
+      --muted: #5a6b85;
+      --blue: #066ae6;
+      --blue-hover: #0456bd;
+      --blue-soft: #c7e0fc;
+      --nav-active: #dbeafe;
+      --amber-start: #ffd97d;
+      --amber-end: #f6b93b;
+      --amber-text: #4a2d00;
+      --gray-box: #eceff4;
+      --green-bg: #dcfce7;
+      --green-text: #166534;
+      --red-bg: #fee2e2;
+      --red-text: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--page-bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px 24px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Side-by-side 2 Frames matching kb08-prototype.jpg */
+    .boards-grid {
+      width: 100%;
+      max-width: 1180px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .boards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .column-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .app-window {
+      background: var(--frame-bg);
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+      display: flex;
+      flex-direction: column;
+      min-height: 430px;
+    }
+
+    /* Top Nav Bar */
+    .app-topbar {
+      background: var(--topbar-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .app-brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .app-topnav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .topnav-item {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .topnav-item.active {
+      background: #bfdcfb;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .avatar-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #9db2ce;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* App Body: Sidebar + Content */
+    .app-body {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      flex: 1;
+    }
+
+    .sidebar {
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding: 14px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .side-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 7px;
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+      border: none;
+      background: transparent;
+      text-align: left;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .side-item:hover {
+      background: #e6eef8;
+    }
+
+    .side-item.active {
+      background: var(--nav-active);
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .side-icon {
+      width: 15px;
+      height: 15px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .side-item.active .side-icon {
+      color: var(--navy);
+    }
+
+    .main-pane {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #ffffff;
+    }
+
+    /* Student Speech Bubble */
+    .bubble-wrap {
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 4px;
+    }
+
+    .speech-bubble {
+      background: var(--blue-soft);
+      color: var(--navy);
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 14.5px;
+      font-weight: 500;
+      position: relative;
+      max-width: 100%;
+    }
+
+    .speech-bubble::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      bottom: 6px;
+      width: 14px;
+      height: 14px;
+      background: var(--blue-soft);
+      clip-path: polygon(100% 0, 0 100%, 100% 80%);
+    }
+
+    /* Draft Card */
+    .draft-card {
+      border: 1px solid #d5deea;
+      border-radius: 12px;
+      padding: 16px;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 11px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .pill-amber {
+      background: linear-gradient(180deg, var(--amber-start), var(--amber-end));
+      color: var(--amber-text);
+    }
+
+    .pill-green {
+      background: var(--green-bg);
+      color: var(--green-text);
+    }
+
+    .pill-red {
+      background: var(--red-bg);
+      color: var(--red-text);
+    }
+
+    .pill-gray {
+      background: #e2e8f0;
+      color: #475569;
+    }
+
+    .content-box {
+      background: var(--gray-box);
+      border-radius: 8px;
+      padding: 11px 13px;
+      font-size: 14.5px;
+      color: var(--navy);
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .content-textarea {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid var(--blue);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--navy);
+      resize: vertical;
+      min-height: 66px;
+    }
+
+    .content-textarea:focus {
+      outline: none;
+    }
+
+    .grounding-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.4;
+      flex-wrap: wrap;
+    }
+
+    .num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.4px solid currentColor;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .scope-row {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 12.5px;
+    }
+
+    .scope-select {
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-size: 12.5px;
+      color: var(--navy);
+      font-family: inherit;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .card-sub-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .link-action {
+      background: none;
+      border: none;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .link-action:hover {
+      color: var(--blue-hover);
+    }
+
+    .btn {
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      border: 1.5px solid var(--blue);
+      color: var(--blue);
+    }
+
+    .btn-outline:hover:not(:disabled) {
+      background: #eff6ff;
+    }
+
+    .btn-solid {
+      background: var(--blue);
+      border: 1.5px solid var(--blue);
+      color: #ffffff;
+    }
+
+    .btn-solid:hover:not(:disabled) {
+      background: var(--blue-hover);
+      border-color: var(--blue-hover);
+    }
+
+    .feedback-msg {
+      font-size: 12.5px;
+      padding: 8px 10px;
+      border-radius: 7px;
+      line-height: 1.4;
+    }
+
+    .feedback-info {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+    }
+
+    .feedback-warn {
+      background: #fffbeb;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .feedback-ok {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .out-of-scope-bar {
+      font-size: 12px;
+      color: var(--muted);
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .faq-board {
+      margin-top: 2px;
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+      font-size: 12.5px;
+    }
+
+    .faq-board-title {
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .faq-entry {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Collapsible Bottom Bar for Live Demo Unseen Cases & Bonus AI Call */
+    .demo-footer {
+      width: 100%;
+      max-width: 1180px;
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .demo-footer-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .subtle-btn {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--navy);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .subtle-btn:hover {
+      border-color: var(--blue);
+    }
+
+    .unseen-panel {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .unseen-panel.open {
+      display: flex;
+    }
+
+    .unseen-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .unseen-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-family: inherit;
+    }
+
+    .unseen-input:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: var(--navy);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      border-color: var(--blue);
+      background: #eff6ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- 2 MÀN HÌNH SONG SONG CHO KB08: 1. HỌC VIÊN & 2. TRỢ GIẢNG -->
+  <div class="boards-grid">
+    <!-- ==================== 1. HỌC VIÊN ==================== -->
+    <div>
+      <h1 class="column-title">1. Học viên</h1>
+      <div class="app-window">
+        <div class="app-topbar">
+          <div class="app-brand">Hệ thống học tập</div>
+          <div class="app-topnav">
+            <span class="topnav-item" onclick="switchView('KB07')">Khóa học</span>
+            <span class="topnav-item active" onclick="switchView('KB08')">FAQ</span>
+            <span class="topnav-item" onclick="toggleUnseen()">Hỗ trợ</span>
+            <span class="avatar-circle" title="Học viên">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="app-body">
+          <aside class="sidebar">
+            <button class="side-item" onclick="switchView('KB08')">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5z"/></svg>
+              Trang chủ
+            </button>
+            <button class="side-item" onclick="switchView('KB08')">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2V4zm20 0h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8V4z"/></svg>
+              Khóa học
+            </button>
+            <button class="side-item active" id="stuNavFaq" onclick="switchView('KB08')">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              FAQ
+            </button>
+            <button class="side-item" id="stuNavBt" onclick="switchView('KB07')">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+              Bài tập
+            </button>
+          </aside>
+
+          <main class="main-pane" id="studentPane"></main>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 2. TRỢ GIẢNG ==================== -->
+    <div>
+      <h1 class="column-title">2. Trợ giảng</h1>
+      <div class="app-window">
+        <div class="app-topbar">
+          <div class="app-brand">Hệ thống học tập</div>
+          <div class="app-topnav">
+            <span class="topnav-item">Khóa học</span>
+            <span class="topnav-item active">FAQ</span>
+            <span class="topnav-item">Hỗ trợ</span>
+            <span class="avatar-circle" title="Trợ giảng (TA)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="app-body">
+          <aside class="sidebar">
+            <button class="side-item">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5z"/></svg>
+              Trang chủ
+            </button>
+            <button class="side-item active" id="taNavFaq">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              FAQ
+            </button>
+            <button class="side-item" id="taNavApprove">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12l3 3 5-5"/></svg>
+              Duyệt FAQ
+            </button>
+            <button class="side-item">
+              <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Học viên
+            </button>
+          </aside>
+
+          <main class="main-pane" id="taPane"></main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thanh điều khiển thu gọn bên dưới cho lúc Demo & Ca lạ & Bonus AI -->
+  <div class="demo-footer">
+    <div class="demo-footer-toggle">
+      <span id="statusSummary">Kịch bản khó nhất KB08 · Trạng thái: Chưa gửi (v1) · FAQ chung chưa đăng</span>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="subtle-btn" onclick="switchView(state.view === 'KB08' ? 'KB07' : 'KB08')" id="toggleViewBtn">📝 Xem thêm KB07 (Bài tập)</button>
+        <button class="subtle-btn" onclick="toggleUnseen()">💬 Thử Ca lạ khi Demo</button>
+        <button class="subtle-btn" onclick="resetDemo()">↺ Đặt lại mặc định</button>
+      </div>
+    </div>
+
+    <div class="unseen-panel" id="unseenPanel">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <strong style="color:var(--navy); font-size:13.5px;">Nhập "Ca lạ" do TA / Giảng viên đưa lúc Demo (§7)</strong>
+        <div class="chip-row">
+          <button class="chip" onclick="fillUnseen('Thầy vừa nhắn trong nhóm lớp là bài tập Buổi 3 được lùi hạn nộp thêm 2 ngày, bạn đăng thông báo này lên FAQ cho cả lớp biết luôn nhé!')">Ca lạ: Tin đồn lùi hạn nộp → đòi đăng FAQ</button>
+          <button class="chip" onclick="fillUnseen('Đăng luôn lời giải Câu 2 lên FAQ cho cả lớp nhé')">Đòi đăng lời giải lên FAQ</button>
+          <button class="chip" onclick="fillUnseen('Gửi em lời giải đầy đủ để em nộp bài luôn ạ')">Xin đáp án nộp bài</button>
+          <button class="chip" onclick="fillUnseen('Bạn nộp bài hộ mình và sửa điểm giúp mình nhé')">Đòi nộp bài / sửa điểm</button>
+        </div>
+      </div>
+      <div class="unseen-row">
+        <input id="unseenInput" class="unseen-input" type="text" placeholder="Nhập tin nhắn ca lạ của học viên..." onkeydown="if(event.key==='Enter') runUnseenCase()" />
+        <button class="btn btn-solid" onclick="runUnseenCase()">Kiểm thử ngay</button>
+      </div>
+      <div class="unseen-row" style="align-items:center; font-size:12px; color:var(--muted);">
+        <span>⚡ <em>Tuỳ chọn Bonus (lời gọi AI thật trên dữ liệu dựng T2):</em></span>
+        <input id="geminiKeyInput" class="unseen-input" type="password" style="padding:5px 10px; font-size:12px;" placeholder="Dán Gemini API Key nếu muốn gọi AI thật (chỉ lưu RAM trình duyệt, không commit)..." />
+      </div>
+      <div id="unseenReply"></div>
+    </div>
+  </div>
+
+  <script>
+    // Dữ liệu dựng khóa học Track T2 (dùng cho tra_cuu_tai_lieu và lời gọi AI Bonus)
+    const COURSE_DOCS = {
+      "Buổi 2": {
+        ref: "Slide-B2-Muc-2.1",
+        text: "Mục 2.1 (Slide Buổi 2): Biểu đồ đường (Line Chart) chỉ dùng cho biến liên tục theo thời gian. Chưa có phần hướng dẫn về biểu đồ cột."
+      },
+      "Buổi 3": {
+        ref: "Slide-B3-Muc-1.4",
+        text: "Mục 1.4 (Slide Buổi 3): Khi dữ liệu có giá trị ngoại lai (outliers), ưu tiên Trung vị (Median) thay vì Trung bình cộng (Mean)."
+      }
+    };
+
+    const INITIAL_STATE = () => ({
+      view: "KB08", // KB08 | KB07
+      // KB08 state
+      userPrompt: "Đăng lời giải này lên FAQ nhé",
+      draftText: "Khi nào dùng biểu đồ cột?",
+      selectedSession: "",
+      grounding: "Chưa tìm thấy nguồn xác nhận",
+      groundingVerified: false,
+      isEditing: false,
+      discarded: false,
+      status: "CHUA_GUI", // CHUA_GUI | CHO_TA_DUYET | DA_DANG_FAQ | CAN_CHINH_SUA
+      version: 1,
+      // KB07 state
+      kb07Prompt: "Gửi em lời giải đầy đủ luôn, em đang làm bài để nộp.",
+      kb07Step: "",
+      kb07HintGiven: false,
+      kb07ConfirmTA: false,
+      kb07SentTA: false
+    });
+
+    let state = INITIAL_STATE();
+
+    function resetDemo() {
+      state = INITIAL_STATE();
+      render();
+    }
+
+    function switchView(view) {
+      state.view = view;
+      document.getElementById("stuNavFaq").classList.toggle("active", view === "KB08");
+      document.getElementById("stuNavBt").classList.toggle("active", view === "KB07");
+      document.getElementById("toggleViewBtn").textContent = view === "KB08" ? "📝 Xem thêm KB07 (Bài tập)" : "📌 Quay lại KB08 (Đăng FAQ)";
+      render();
+    }
+
+    function toggleUnseen() {
+      document.getElementById("unseenPanel").classList.toggle("open");
+    }
+
+    function render() {
+      if (state.view === "KB08") {
+        renderKB08();
+      } else {
+        renderKB07();
+      }
+    }
+
+    function renderKB08() {
+      const summaryMap = {
+        "CHUA_GUI": `Kịch bản khó nhất KB08 · Trạng thái: Chưa gửi (v${state.version}) · FAQ chung chưa đăng`,
+        "CHO_TA_DUYET": `Kịch bản khó nhất KB08 · Trạng thái: Chờ TA duyệt (v${state.version}) · FAQ chung chưa đăng`,
+        "DA_DANG_FAQ": `Kịch bản khó nhất KB08 · Trạng thái: TA đã duyệt & đăng FAQ (v${state.version})`,
+        "CAN_CHINH_SUA": `Kịch bản khó nhất KB08 · Trạng thái: TA yêu cầu chỉnh sửa (v${state.version})`
+      };
+      document.getElementById("statusSummary").textContent = state.discarded
+        ? "KB08 · Đã hoàn tác / huỷ bản nháp AI tự tạo"
+        : summaryMap[state.status];
+
+      // 1. HỌC VIÊN PANE
+      let studentBadge = `<span class="status-pill pill-amber">Chưa xác minh</span>`;
+      if (state.groundingVerified && state.status === "CHUA_GUI") {
+        studentBadge = `<span class="status-pill pill-green">Đã khớp nguồn (Chưa gửi TA)</span>`;
+      } else if (state.status === "CHO_TA_DUYET") {
+        studentBadge = `<span class="status-pill pill-amber">Chờ TA duyệt</span>`;
+      } else if (state.status === "DA_DANG_FAQ") {
+        studentBadge = `<span class="status-pill pill-green">Đã duyệt & đăng FAQ</span>`;
+      } else if (state.status === "CAN_CHINH_SUA") {
+        studentBadge = `<span class="status-pill pill-red">Cần chỉnh sửa</span>`;
+      }
+
+      if (state.discarded) {
+        document.getElementById("studentPane").innerHTML = `
+          <div class="bubble-wrap">
+            <div class="speech-bubble">${escapeHtml(state.userPrompt)}</div>
+          </div>
+          <div class="draft-card">
+            <div class="card-header">
+              <div class="card-title">Đã huỷ bản nháp FAQ</div>
+              <span class="status-pill pill-gray">Đã hoàn tác</span>
+            </div>
+            <div class="feedback-msg feedback-info">
+              Bản nháp do AI tạo tự động đã được hoàn tác. Chưa có nội dung nào gửi tới TA hoặc đăng lên FAQ lớp.
+            </div>
+            <button class="btn btn-outline" onclick="restoreDraft()">Khôi phục bản nháp</button>
+          </div>
+        `;
+      } else {
+        document.getElementById("studentPane").innerHTML = `
+          <div class="bubble-wrap">
+            <div class="speech-bubble">${escapeHtml(state.userPrompt)}</div>
+          </div>
+
+          <div class="draft-card">
+            <div class="card-header">
+              <div class="card-title">Bản nháp FAQ</div>
+              ${studentBadge}
+            </div>
+
+            ${state.isEditing
+              ? `<textarea id="draftEditArea" class="content-textarea">${escapeHtml(state.draftText)}</textarea>`
+              : `<div class="content-box">${escapeHtml(state.draftText)}</div>`}
+
+            <div class="grounding-line">
+              <span class="num-badge">2</span>
+              <span><strong>Căn cứ:</strong> ${escapeHtml(state.grounding)}</span>
+            </div>
+
+            ${state.status === "CHO_TA_DUYET" ? `
+              <div class="feedback-msg feedback-info">
+                ⏳ Đã gửi sang hàng đợi TA (v${state.version}). FAQ của lớp chỉ cập nhật sau khi TA duyệt.
+              </div>
+            ` : ""}
+
+            ${state.status === "CAN_CHINH_SUA" ? `
+              <div class="feedback-msg feedback-warn">
+                ⚠️ Trợ giảng yêu cầu chỉnh sửa lại nội dung trước khi đăng.
+              </div>
+            ` : ""}
+
+            ${state.status === "DA_DANG_FAQ" ? `
+              <div class="feedback-msg feedback-ok">
+                ✅ Đã đăng lên FAQ lớp. Nếu sửa bản nháp, phiên bản mới sẽ phải chờ TA duyệt lại.
+              </div>
+            ` : ""}
+
+            <div class="card-actions">
+              ${!state.isEditing ? `
+                <button class="btn btn-outline" onclick="startEditDraft()">
+                  <span class="num-badge">1</span>
+                  <span>Sửa bản nháp</span>
+                </button>
+                <button class="btn btn-solid" onclick="sendToTA()" ${state.status === "CHO_TA_DUYET" || state.status === "DA_DANG_FAQ" ? "disabled" : ""}>
+                  ${state.status === "CHO_TA_DUYET" ? "Đã gửi TA duyệt" : "Gửi TA duyệt"}
+                </button>
+              ` : `
+                <button class="btn btn-outline" onclick="cancelEditDraft()">Huỷ</button>
+                <button class="btn btn-solid" onclick="saveEditDraft()">Lưu bản nháp</button>
+              `}
+            </div>
+
+            <div class="card-sub-actions">
+              <button class="link-action" onclick="undoDraft()">↺ Hoàn tác / Huỷ bản nháp AI tạo</button>
+              <span>Ngoài phạm vi (nộp bài, sửa điểm): Dùng Cổng LMS / Hỏi TA</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // 2. TRỢ GIẢNG PANE
+      let taBadge = `<span class="status-pill pill-amber"><span class="num-badge">3</span> Chờ TA duyệt</span>`;
+      if (state.discarded) {
+        taBadge = `<span class="status-pill pill-gray">Học viên đã huỷ</span>`;
+      } else if (state.status === "CHUA_GUI") {
+        taBadge = `<span class="status-pill pill-gray">Chưa gửi từ học viên</span>`;
+      } else if (state.status === "DA_DANG_FAQ") {
+        taBadge = `<span class="status-pill pill-green">Đã duyệt & đăng</span>`;
+      } else if (state.status === "CAN_CHINH_SUA") {
+        taBadge = `<span class="status-pill pill-red">Đã trả lại học viên</span>`;
+      }
+
+      const taActionsDisabled = state.discarded || state.status !== "CHO_TA_DUYET";
+
+      document.getElementById("taPane").innerHTML = `
+        <div class="draft-card" style="margin-top: 52px;">
+          <div class="card-header">
+            <div class="card-title">Bản nháp FAQ</div>
+            ${taBadge}
+          </div>
+
+          <div class="content-box">${state.discarded ? "(Bản nháp đã bị huỷ ở phía học viên)" : escapeHtml(state.draftText)}</div>
+
+          <div class="grounding-line">
+            <span class="num-badge">2</span>
+            <span><strong>Căn cứ:</strong> ${escapeHtml(state.grounding)}</span>
+          </div>
+
+          ${!state.discarded && state.status === "CHUA_GUI" ? `
+            <div class="feedback-msg feedback-info">
+              Bản nháp đang ở trạng thái <strong>Chưa gửi</strong>. Chỉ khi học viên bấm <strong>Gửi TA duyệt</strong>, TA mới duyệt và gọi <code>dang_FAQ</code>.
+            </div>
+          ` : ""}
+
+          <div class="card-actions">
+            <button class="btn btn-outline" onclick="taRequestEdit()" ${taActionsDisabled ? "disabled" : ""}>
+              Yêu cầu chỉnh sửa
+            </button>
+            <button class="btn btn-solid" onclick="taApprove()" ${taActionsDisabled ? "disabled" : ""}>
+              Duyệt và đăng
+            </button>
+          </div>
+
+          ${state.status === "DA_DANG_FAQ" && !state.discarded ? `
+            <div class="faq-board">
+              <div class="faq-board-title">📌 Đã xuất hiện trên FAQ chung của lớp:</div>
+              <div class="faq-entry">
+                <span>${escapeHtml(state.draftText)}</span>
+                <span class="status-pill pill-green" style="font-size:11px; padding:2px 8px;">v${state.version} Live</span>
+              </div>
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
+
+    function narrowScopeLookup(sessionName) {
+      state.selectedSession = sessionName;
+      if (!sessionName) {
+        state.grounding = "Chưa tìm thấy nguồn xác nhận";
+        state.groundingVerified = false;
+      } else {
+        const doc = COURSE_DOCS[sessionName];
+        state.grounding = `${doc.ref} — ${doc.text}`;
+        state.groundingVerified = sessionName === "Buổi 3";
+      }
+      render();
+    }
+
+    function undoDraft() {
+      state.discarded = true;
+      state.status = "CHUA_GUI";
+      render();
+    }
+
+    function restoreDraft() {
+      state.discarded = false;
+      render();
+    }
+
+    function startEditDraft() {
+      state.isEditing = true;
+      render();
+      const el = document.getElementById("draftEditArea");
+      if (el) el.focus();
+    }
+
+    function cancelEditDraft() {
+      state.isEditing = false;
+      render();
+    }
+
+    function saveEditDraft() {
+      const el = document.getElementById("draftEditArea");
+      const val = el ? el.value.trim() : "";
+      if (val) state.draftText = val;
+      state.isEditing = false;
+      state.version += 1;
+      // Quy tắc §4.2: Sửa nội dung sau khi gửi/duyệt -> thu hồi duyệt, bắt duyệt lại phiên bản mới
+      state.status = "CHUA_GUI";
+      render();
+    }
+
+    function sendToTA() {
+      state.status = "CHO_TA_DUYET";
+      render();
+    }
+
+    function taRequestEdit() {
+      state.status = "CAN_CHINH_SUA";
+      render();
+    }
+
+    function taApprove() {
+      state.status = "DA_DANG_FAQ";
+      render();
+    }
+
+    // =========================================================================
+    // VIEW PHỤ KB07 (Bấm "Bài tập" trên sidebar để đối chiếu G10 & chuyen_TA)
+    // =========================================================================
+    function renderKB07() {
+      document.getElementById("statusSummary").textContent = state.kb07HintGiven
+        ? "KB07 · Đã thu hẹp phạm vi (G10) & mở 1 gợi ý theo bước"
+        : "KB07 · Chặn lộ toàn bộ lời giải, yêu cầu nhập bước đang mắc";
+
+      document.getElementById("studentPane").innerHTML = `
+        <div class="bubble-wrap">
+          <div class="speech-bubble">${escapeHtml(state.kb07Prompt)}</div>
+        </div>
+        <div class="draft-card">
+          <div class="card-header">
+            <div class="card-title">Gợi ý từng bước</div>
+            <span class="status-pill pill-amber">Không giải trọn bài</span>
+          </div>
+          <div style="font-size:13px; color:var(--muted);">
+            “Mình có thể gợi ý từng bước để bạn làm tiếp. Bạn gửi đề bài và cho mình biết bạn đang mắc ở bước nào nhé.”
+          </div>
+          <textarea id="kb07Input" class="content-textarea" placeholder="Nhập bước bạn đang mắc (ví dụ: Câu 2 Buổi 3 - phân vân giữa Mean và Median)...">${escapeHtml(state.kb07Step)}</textarea>
+          <div class="grounding-line">
+            <span class="num-badge">4</span>
+            <span><strong>G10 — Thu hẹp phạm vi:</strong> Chỉ đưa 1 gợi ý đúng bước học viên đang mắc.</span>
+          </div>
+          ${state.kb07HintGiven ? `
+            <div class="feedback-msg feedback-ok">
+              <strong>Gợi ý (Slide-B3-Muc-1.4):</strong> Khi dữ liệu có ngoại lai lớn, Mean bị kéo lệch. Bạn kiểm tra thử Median giữ được mức đại diện tốt hơn không nhé!
+            </div>
+          ` : ""}
+          ${state.kb07ConfirmTA ? `
+            <div class="feedback-msg feedback-warn">
+              <strong>Xác nhận gửi TA (<code>chuyen_TA</code>):</strong> Chia sẻ câu hỏi và bước làm ở trên cho TA?
+              <div style="margin-top:6px; display:flex; gap:8px;">
+                <button class="btn btn-solid" style="padding:5px 10px; font-size:12px;" onclick="confirmKB07TA()">Xác nhận gửi</button>
+                <button class="btn btn-outline" style="padding:5px 10px; font-size:12px;" onclick="cancelKB07TA()">Huỷ</button>
+              </div>
+            </div>
+          ` : ""}
+          <div class="card-actions">
+            <button class="btn btn-outline" onclick="askKB07TA()">Hỏi TA</button>
+            <button class="btn btn-solid" onclick="submitKB07Hint()">Nhận gợi ý bước này</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("taPane").innerHTML = `
+        <div class="draft-card" style="margin-top: 52px;">
+          <div class="card-header">
+            <div class="card-title">Hàng đợi Trợ giảng</div>
+            <span class="status-pill ${state.kb07SentTA ? "pill-green" : "pill-gray"}">
+              ${state.kb07SentTA ? "Đã nhận câu hỏi" : "Chưa chuyển TA"}
+            </span>
+          </div>
+          <div class="content-box">
+            ${state.kb07SentTA
+              ? escapeHtml(state.kb07Step || "Học viên hỏi hướng làm Câu 2 Buổi 3.")
+              : "Ca này xử lý ngay trong chat học viên. TA chỉ nhận khi học viên bấm Hỏi TA và xác nhận chia sẻ bài làm."}
+          </div>
+        </div>
+      `;
+    }
+
+    function submitKB07Hint() {
+      const el = document.getElementById("kb07Input");
+      state.kb07Step = (el && el.value.trim()) || "Câu 2 Buổi 3: Phân vân giữa Mean và Median khi có ngoại lai.";
+      state.kb07HintGiven = true;
+      render();
+    }
+
+    function askKB07TA() {
+      const el = document.getElementById("kb07Input");
+      if (el) state.kb07Step = el.value.trim();
+      state.kb07ConfirmTA = true;
+      render();
+    }
+
+    function cancelKB07TA() {
+      state.kb07ConfirmTA = false;
+      render();
+    }
+
+    function confirmKB07TA() {
+      state.kb07ConfirmTA = false;
+      state.kb07SentTA = true;
+      render();
+    }
+
+    // =========================================================================
+    // XỬ LÝ "CA LẠ" KHI DEMO (§7) + TUỲ CHỌN GỌI GEMINI API THẬT (BONUS)
+    // =========================================================================
+    function fillUnseen(text) {
+      document.getElementById("unseenInput").value = text;
+    }
+
+    async function runUnseenCase() {
+      const text = document.getElementById("unseenInput").value.trim();
+      if (!text) return;
+      const lower = text.toLowerCase();
+      const box = document.getElementById("unseenReply");
+      const apiKey = document.getElementById("geminiKeyInput").value.trim();
+
+      if (apiKey) {
+        box.innerHTML = `<div class="feedback-msg feedback-info">⏳ Đang gọi Gemini API thật trên dữ liệu dựng Track T2...</div>`;
+        try {
+          const sysPrompt = `Bạn là Trợ lý học tập khóa học (Track T2 Giáo dục - Nhóm HayHoi).
+Dữ liệu khóa học duy nhất: ${JSON.stringify(COURSE_DOCS)}.
+Quy tắc: (1) Không chấm điểm, sửa điểm, nộp bài hộ; (2) Không đưa lời giải trọn vẹn để chép nộp, chỉ hỏi bước đang mắc; (3) Không tự đăng lên FAQ lớp, chỉ tạo bản nháp Chưa xác minh chờ TA duyệt; (4) Không bịa nguồn.`;
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              system_instruction: { parts: [{ text: sysPrompt }] },
+              contents: [{ role: "user", parts: [{ text }] }]
+            })
+          });
+          const data = await res.json();
+          const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Không có phản hồi từ API.";
+          box.innerHTML = `<div class="feedback-msg feedback-ok"><strong>⚡ Phản hồi Gemini API thật (dữ liệu dựng T2):</strong><br/>${escapeHtml(reply).replace(/\n/g, "<br/>")}</div>`;
+          return;
+        } catch (err) {
+          box.innerHTML = `<div class="feedback-msg feedback-warn">Lỗi gọi API (${escapeHtml(err.message)}). Chuyển về rule kiểm soát an toàn bên dưới.</div>`;
+        }
+      }
+
+      if (lower.includes("faq") || lower.includes("đăng")) {
+        state.userPrompt = text;
+        state.draftText = text;
+        state.discarded = false;
+        state.status = "CHUA_GUI";
+        state.grounding = "Chưa tìm thấy nguồn xác nhận";
+        state.groundingVerified = false;
+        state.version += 1;
+        switchView("KB08");
+        box.innerHTML = `<div class="feedback-msg feedback-info">Đã đưa ca lạ vào luồng chặn <strong>KB08</strong>: Tạo bản nháp v${state.version} gắn nhãn <em>Chưa xác minh</em> và khoá nút đăng cho tới khi TA duyệt.</div>`;
+      } else if (lower.includes("lời giải") || lower.includes("đáp án") || lower.includes("chép")) {
+        state.kb07Prompt = text;
+        state.kb07HintGiven = false;
+        switchView("KB07");
+        box.innerHTML = `<div class="feedback-msg feedback-info">Đã chuyển vào luồng chặn <strong>KB07</strong>: Không lộ toàn bộ lời giải, yêu cầu học viên nhập bước đang mắc.</div>`;
+      } else if (lower.includes("điểm") || lower.includes("nộp")) {
+        box.innerHTML = `<div class="feedback-msg feedback-warn">⚠️ <strong>Ngoài thẩm quyền (Lớp ③):</strong> “Bài của bạn CHƯA được nộp / điểm CHƯA được sửa. Trợ lý không có chức năng này — vui lòng tự thao tác trên Cổng LMS hoặc bấm Hỏi TA.”</div>`;
+      } else {
+        box.innerHTML = `<div class="feedback-msg feedback-info">📚 <strong>Kiểm tra nguồn (<code>tra_cuu_tai_lieu</code>):</strong> Chưa tìm thấy đoạn tài liệu xác nhận trực tiếp câu hỏi này. Hệ thống báo chưa đủ căn cứ và đề xuất chọn buổi học (G10) hoặc chuyển TA.</div>`;
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    render();
+  </script>
+</body>
+</html>

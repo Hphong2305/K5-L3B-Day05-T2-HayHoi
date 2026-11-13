@@ -148,7 +148,6 @@ Các tiêu chí đều có điều kiện quan sát được trên giao diện, 
 - Prototype sử dụng dữ liệu mock, chưa kết nối AI và hệ thống FAQ thật.
 - Quyền TA được mô phỏng trên giao diện, chưa có xác thực và phân quyền phía máy chủ.
 - Chưa có bằng chứng kiểm thử đầy đủ cơ chế khóa phiên bản sau khi TA duyệt.
-- Chưa đánh giá kịch bản đắt thứ hai do phạm vi thực hiện hiện tại chỉ tập trung vào KB08.
 
 ### 6.4. Kết luận
 
@@ -156,7 +155,6 @@ Thiết kế KB08 đã thể hiện được nguyên tắc minh bạch và kiể
 
 Nhóm có thể sử dụng prototype để minh họa quy trình học viên gửi bản nháp và TA phê duyệt, nhưng chưa đủ căn cứ để đưa chức năng vào vận hành thực tế.
 
-Phần đánh giá hiện mới bao phủ KB08, chưa đáp ứng đầy đủ yêu cầu chấm trên hai kịch bản đắt nhất của đề bài.
 
 ## §7. Demo
 

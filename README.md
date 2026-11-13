@@ -1,4 +1,4 @@
-# K5-L3B-Day05-track-HayHoi — Track T2 Giáo dục · Nhóm HayHoi
+# K5-L3B-Day05-T2-HayHoi — Track T2 Giáo dục · Nhóm HayHoi
 
 Bài nộp LAB5: Thiết kế sản phẩm AI cho lúc nó sai và kiểm soát mức tự chủ cho trợ lý học tập khóa học (Study Mode).
 

@@ -4,7 +4,7 @@
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
 | Đào Văn Hiệp | 2A202603813 | [Phần việc cụ thể] |
-| [Nguyễn Hồng Thắng] | [2A202603829] | [Phần việc cụ thể] |
+| Nguyễn Hồng Thắng | 2A202603829| [Phần việc cụ thể] |
 | Hoàng Thế Phong | 2A202603832 | [Phần việc cụ thể] |
 
 ## §1. Lát cắt & phạm vi

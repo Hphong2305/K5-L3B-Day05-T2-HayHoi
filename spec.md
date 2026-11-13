@@ -1,11 +1,11 @@
-# Bài nộp LAB5 — T2 Giáo dục · Nhóm [tên]
-**Lớp:** [L3A hoặc L3B] · **Bàn / zone:** [điền] · **Track:** T2 — Giáo dục
+# Bài nộp LAB5 — T2 Giáo dục · Nhóm HayHoi
+**Lớp:** L3B · **Bàn / zone:** L · **Track:** T2 — Giáo dục
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-| Đào Văn Hiệp | 2A202603813 | [Phần việc cụ thể] |
-| Nguyễn Hồng Thắng | 2A202603829| [Phần việc cụ thể] |
-| Hoàng Thế Phong | 2A202603832 | [Phần việc cụ thể] |
+| Đào Văn Hiệp | 2A202603813 | 	Xác định phạm vi, lập bảng rủi ro và trình bày KB07–KB08 |
+| Nguyễn Hồng Thắng | 2A202603829| Thiết kế luồng xử lý, mức tự chủ và kiểm soát phiên bản |
+| Hoàng Thế Phong | 2A202603832 | Dựng prototype HTML và trình bày thao tác duyệt FAQ |
 
 ## §1. Lát cắt & phạm vi
 **Lát cắt.** Trong trợ lý học bài của trang khoá học (kiểu ChatGPT Study mode), khi học viên đang hỏi bài lúc tối muộn, khi không còn ai để hỏi, AI giảng kèm trích tài liệu, hỏi lại cho rõ, gợi ý từng bước, hay nói thẳng "tài liệu không có, hỏi giảng viên", để học viên hiểu đúng bài mình đang học, không chép đáp án, không học sai mà không biết.
@@ -63,10 +63,12 @@
 
 - **HAX G9 — Sửa dễ dàng.** Nút **Sửa bản nháp** ở KB08 cho phép học viên chỉnh nội dung trước khi gửi duyệt.
 - **PAIR — Giải thích và xây dựng niềm tin.** Mục **Căn cứ** ở KB08 hiển thị kết quả tra cứu để người dùng biết lời giải còn thiếu nguồn xác nhận.
-
+- **HAX G10 — Thu hẹp phạm vi khi nghi ngờ.** Trong KB08, khi câu hỏi thiếu ngữ cảnh hoặc chưa tìm thấy nguồn phù hợp, học viên có thể chọn buổi học
+  để AI tra cứu lại trong phạm vi buổi đó. Kết quả tra cứu mới được hiển thị ở mục **Căn cứ**. Quyền đăng FAQ vẫn thuộc về TA.
+  
 **Kiểm soát việc đăng.** Nhãn **Chưa xác minh** giúp người dùng nhận biết tình trạng của bản nháp. Hệ thống chỉ cho phép gọi `dang_FAQ` sau khi TA duyệt đúng phiên bản. Thao tác **Gửi TA duyệt** chỉ tạo yêu cầu duyệt.
 
-## §4. Mức tự chủ  (chặng 4)
+## §4. Mức tự chủ
 
 ### Quyền của từng công cụ
 
@@ -83,7 +85,14 @@ Công cụ khó xếp quyền nhất là `dang_FAQ`. Trong KB08, tự đăng gi�
 
 Nếu nội dung thay đổi sau khi duyệt, phiên bản mới phải được TA duyệt lại.
 
-**Ý kiến ban đầu của từng thành viên.** [Bổ sung sau khi nhóm thảo luận.]
+Ý kiến ban đầu của từng thành viên.
+| Thành viên | Đề xuất | Lý do |
+|---|---|---|
+| Đào Văn Hiệp | Cần TA duyệt | TA cần kiểm tra nội dung trước khi công bố cho cả lớp. |
+| Nguyễn Hồng Thắng | Cấm AI đăng trực tiếp | Bài đăng sai có thể được đọc trước khi kịp gỡ. |
+| Hoàng Thế Phong | Tự làm khi có căn cứ | Muốn giảm thời gian chờ, nhưng nguồn phù hợp vẫn có thể bị AI diễn giải sai. |
+
+Quyết định chung. AI soạn bản nháp và TA duyệt đúng phiên bản trước khi đăng.
 
 Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. Nội dung sẽ xuất hiện trong FAQ của lớp sau khi TA duyệt.”
 
@@ -94,8 +103,7 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 | **KB07 · Xin lời giải đầy đủ** | AI hỏi học viên đang mắc ở bước nào. Sau khi có đủ thông tin, AI đưa một gợi ý cho bước đó. | Có, nếu luồng chặn việc hiển thị toàn bộ lời giải. | AI hỏi trước khi gợi ý nếu thiếu thông tin. | Học viên chỉ cần trả lời một câu, không phải chờ TA. |
 | **KB08 · Đòi đăng lời giải lên FAQ** | AI hiện bản nháp **Chưa xác minh**. Học viên bấm **Gửi TA duyệt**, rồi thấy trạng thái **Chờ TA duyệt**. | Có, nếu `dang_FAQ` chỉ chạy sau khi TA duyệt đúng bản nháp. | AI chờ học viên gửi yêu cầu và chờ TA duyệt trước khi đăng. | Có thời gian chờ để kiểm chứng nội dung trước khi cả lớp đọc. |
 | **Ca bình thường · Hỏi một khái niệm có trong tài liệu** | AI tự gọi `tra_cuu_tai_lieu`, trả lời và hiện mã mục để học viên đối chiếu. | Có thể đối chiếu câu trả lời với đoạn nguồn hiển thị. | Câu hỏi rõ và có nguồn phù hợp nên có thể trả lời ngay. | Trả lời ngay, không qua bước duyệt. |
-
-
+ 
 ## §5. Prototype
 
 **Kịch bản minh họa.** KB08 — Học viên đề nghị đăng lời giải chưa được xác minh lên FAQ.
@@ -109,7 +117,7 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 | ③ | **Chờ TA duyệt** | Bản nháp chờ TA kiểm tra. FAQ chỉ cập nhật sau khi TA chọn **Duyệt và đăng**. |
 | ④ | **Thu hẹp phạm vi (G10)** | HAX G10 — Học viên chọn buổi học để tra cứu lại khi câu hỏi ban đầu thiếu ngữ cảnh hoặc chưa tìm thấy nguồn. |
 
-Học viên xem hoặc sửa bản nháp rồi chọn **Gửi TA duyệt**. TA có thể **Yêu cầu chỉnh sửa** hoặc **Duyệt và đăng** sau khi kiểm tra nội dung. Nhóm chọn hiển thị kết quả tra cứu vì người xem cần biết lời giải còn thiếu căn cứ nào. Bước duyệt giới hạn quyền đăng nội dung ảnh hưởng đến cả lớp.
+**Luồng thao tác trên prototype.** Khi học viên chọn **Sửa bản nháp**, hệ thống mở phần chỉnh sửa nội dung. Yêu cầu chuyển sang **Chờ TA duyệt** sau khi học viên chọn **Gửi TA duyệt**. Trên màn hình trợ giảng, TA kiểm tra bản nháp và căn cứ, sau đó chọn **Yêu cầu chỉnh sửa** hoặc **Duyệt và đăng**. FAQ chỉ cập nhật sau khi TA duyệt đúng phiên bản. Nếu nội dung thay đổi, học viên cần gửi phiên bản mới để TA duyệt lại trước khi đăng.
 
 ![Prototype KB08 — Trạng thái 1: Chưa xác minh & Chưa gửi TA](prototype/kb08-prototype.png)
 
@@ -117,44 +125,29 @@ Học viên xem hoặc sửa bản nháp rồi chọn **Gửi TA duyệt**. TA c
 
 **Kết quả chạy thử trên [`prototype/index.html`](prototype/index.html):** Khi học viên bấm **① Sửa bản nháp** hoặc **Gửi TA duyệt**, trạng thái bên màn hình Trợ giảng chuyển sang **③ Chờ TA duyệt** và mở hai nút **Yêu cầu chỉnh sửa / Duyệt và đăng**. FAQ chung của lớp chỉ cập nhật sau khi TA bấm **Duyệt và đăng**; nếu học viên bấm sửa bản nháp sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi duyệt để yêu cầu TA duyệt lại phiên bản mới.
 
-## 6. Đánh giá thiết kế (Evaluation)
+## §6. Đánh giá thiết kế
+Nhóm mô phỏng hai kịch bản theo đặc tả. Kết quả dưới đây là đánh giá giả định trên luồng thiết kế.
 
-### 6.1. Ba tiêu chí Pass/Fail
+| Tiêu chí | Ca thử | PASS khi | FAIL khi | Kết quả mô phỏng |
+|---|---|---|---|---|
+| TC01 — Gợi ý đúng phạm vi | KB07 | AI hỏi học viên đang mắc ở đâu rồi đưa một gợi ý cho bước đó. | AI đoán bước đang vướng hoặc đưa toàn bộ lời giải. | **PASS theo đặc tả.** Học viên gửi bước đang mắc và nhận một gợi ý cho bước đó. |
+| TC02 — Minh bạch về nguồn | KB08 | Bản nháp thiếu căn cứ hiện nhãn **Chưa xác minh** và giải thích trong mục **Căn cứ**. | Nội dung thiếu căn cứ xuất hiện như đã được xác minh. | **PASS theo đặc tả.** Khi tra cứu chưa có kết quả phù hợp, cả hai vai thấy trạng thái chưa xác minh. |
+| TC03 — Kiểm soát quyền đăng và phiên bản | KB08 | Gửi duyệt hoặc yêu cầu chỉnh sửa chưa cập nhật FAQ. FAQ chỉ cập nhật khi TA duyệt đúng phiên bản. | FAQ cập nhật trước khi TA duyệt hoặc dùng phê duyệt cũ để đăng bản đã sửa. | **PASS theo đặc tả.** Bản sửa quay về luồng gửi duyệt, còn FAQ chỉ nhận phiên bản được TA duyệt. |
 
-Nhóm xác định ba điều kiện quan trọng nhất để có thể đưa chức năng đăng FAQ cho người dùng thật:
-
-| Tiêu chí | PASS khi | FAIL khi |
-|---|---|---|
-| **TC01 – Minh bạch về nguồn** | Bản nháp chưa có nguồn xác nhận phải hiển thị rõ trạng thái "Chưa xác minh" và thông tin căn cứ. | Hệ thống trình bày nội dung chưa xác minh như kiến thức đã được kiểm chứng. |
-| **TC02 – Kiểm soát quyền đăng** | Học viên chỉ được sửa bản nháp hoặc gửi TA duyệt. Chỉ TA có quyền duyệt và đăng FAQ. | Học viên hoặc AI có thể tự đăng FAQ khi chưa được TA phê duyệt. |
-| **TC03 – Kiểm soát phiên bản** | Khi bản nháp thay đổi sau khi được duyệt, phiên bản mới phải được TA duyệt lại trước khi đăng. | Nội dung bị chỉnh sửa vẫn được đăng dựa trên phê duyệt của phiên bản cũ. |
-
-Các tiêu chí đều có điều kiện quan sát được trên giao diện, giúp người ngoài nhóm có thể chấm PASS/FAIL theo cùng một quy tắc.
-
-### 6.2. Kết quả đánh giá thiết kế
-
-**Kịch bản KB08 – Học viên yêu cầu đăng lời giải chưa xác minh lên FAQ.**
-
-| Tiêu chí | Kết quả | Bằng chứng trong thiết kế |
-|---|---|---|
-| TC01 – Minh bạch về nguồn | **PASS** | Giao diện hiển thị "Chưa xác minh" và "Chưa tìm thấy nguồn xác nhận". |
-| TC02 – Kiểm soát quyền đăng | **PASS** | Học viên có nút "Gửi TA duyệt"; TA có nút "Duyệt và đăng". |
-| TC03 – Kiểm soát phiên bản | **PASS về thiết kế** | Quy tắc thiết kế yêu cầu duyệt lại khi nội dung thay đổi; chưa có đủ bằng chứng kiểm thử toàn bộ cơ chế phiên bản. |
-
-**Kết quả:** KB08 đạt 2/3 tiêu chí có bằng chứng giao diện trực tiếp; tiêu chí thứ ba đạt ở mức thiết kế nhưng chưa được xác nhận đầy đủ bằng thao tác kiểm thử.
-
-### 6.3. Lỗi còn lại
-
-- Prototype sử dụng dữ liệu mock, chưa kết nối AI và hệ thống FAQ thật.
-- Chưa có bằng chứng kiểm thử đầy đủ cơ chế khóa phiên bản sau khi TA duyệt.
-
-### 6.4. Kết luận
-
-Thiết kế KB08 đã thể hiện được nguyên tắc minh bạch và kiểm soát của con người đối với việc công bố nội dung AI tạo ra.
-
+Điểm còn cần xác nhận. Chạy thử từng nút trên HTML, đặc biệt nhánh Sửa bản nháp sau khi gửi hoặc sau khi duyệt. KB07 được đánh giá theo đặc tả vì prototype tập trung vào KB08.
 
 ## §7. Demo
 
-**Luồng dự kiến.** Học viên xem bản nháp → Gửi TA duyệt → TA kiểm tra → Duyệt và đăng hoặc yêu cầu chỉnh sửa.
+| Thành viên | Phần trình bày dự kiến |
+|---|---|
+| Đào Văn Hiệp | Giới thiệu lát cắt T2 và lý do chọn KB08 để minh họa. |
+| Nguyễn Hồng Thắng | Thao tác ở vai học viên, chỉ ra nút sửa bản nháp, mục căn cứ và trạng thái chờ duyệt. |
+| Hoàng Thế Phong | Thao tác ở vai TA, minh họa nhánh yêu cầu chỉnh sửa và giải thích quyền đăng theo phiên bản. |
 
-[Điền ca lạ do người xem đưa, cách nhóm xử lý và thay đổi sau demo nếu có.]
+Luồng demo dự kiến. Học viên xem bản nháp chưa xác minh, sửa nội dung và gửi TA duyệt. TA kiểm tra căn cứ rồi chọn Yêu cầu chỉnh sửa hoặc Duyệt và đăng. Nhóm chỉ ra thời điểm FAQ cập nhật.
+
+Ca lạ giả định. Sau khi TA duyệt và đăng phiên bản đầu, học viên sửa câu trả lời rồi yêu cầu cập nhật FAQ ngay.
+
+Cách xử lý dự kiến. Hệ thống lưu nội dung mới dưới dạng bản nháp. FAQ tiếp tục hiển thị phiên bản đã được duyệt. Học viên gửi bản sửa để TA xem lại. FAQ cập nhật khi TA duyệt và đăng phiên bản mới.
+
+Điều chỉnh đề xuất sau ca mô phỏng. Hiển thị riêng nhãn Đang công khai cho phiên bản hiện tại và Chưa gửi duyệt cho bản sửa để người dùng phân biệt hai nội dung.

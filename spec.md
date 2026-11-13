@@ -138,16 +138,16 @@ Nhóm mô phỏng hai kịch bản theo đặc tả. Kết quả dưới đây l
 
 ## §7. Demo
 
-| Thành viên | Phần trình bày dự kiến |
+| Thành viên | Phần trình bày thực tế |
 |---|---|
 | Đào Văn Hiệp | Giới thiệu lát cắt T2 và lý do chọn KB08 để minh họa. |
 | Nguyễn Hồng Thắng | Thao tác ở vai học viên, chỉ ra nút sửa bản nháp, mục căn cứ và trạng thái chờ duyệt. |
 | Hoàng Thế Phong | Thao tác ở vai TA, minh họa nhánh yêu cầu chỉnh sửa và giải thích quyền đăng theo phiên bản. |
 
-Luồng demo dự kiến. Học viên xem bản nháp chưa xác minh, sửa nội dung và gửi TA duyệt. TA kiểm tra căn cứ rồi chọn Yêu cầu chỉnh sửa hoặc Duyệt và đăng. Nhóm chỉ ra thời điểm FAQ cập nhật.
+Luồng demo thực tế. Học viên xem bản nháp chưa xác minh, sửa nội dung và gửi TA duyệt. TA kiểm tra căn cứ rồi chọn Yêu cầu chỉnh sửa hoặc Duyệt và đăng. Nhóm chỉ ra thời điểm FAQ cập nhật.
 
 Ca lạ. Sau khi TA duyệt và đăng phiên bản đầu, học viên sửa câu trả lời rồi yêu cầu cập nhật FAQ ngay.
 
-Cách xử lý dự kiến. Hệ thống lưu nội dung mới dưới dạng bản nháp. FAQ tiếp tục hiển thị phiên bản đã được duyệt. Học viên gửi bản sửa để TA xem lại. FAQ cập nhật khi TA duyệt và đăng phiên bản mới.
+Cách xử lý. Hệ thống lưu nội dung mới dưới dạng bản nháp. FAQ tiếp tục hiển thị phiên bản đã được duyệt. Học viên gửi bản sửa để TA xem lại. FAQ cập nhật khi TA duyệt và đăng phiên bản mới.
 
 Điều chỉnh đề xuất sau ca mô phỏng. Hiển thị riêng nhãn Đang công khai cho phiên bản hiện tại và Chưa gửi duyệt cho bản sửa để người dùng phân biệt hai nội dung.

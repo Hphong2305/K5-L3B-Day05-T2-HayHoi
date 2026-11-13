@@ -68,7 +68,7 @@
   
 **Kiểm soát việc đăng.** Nhãn **Chưa xác minh** giúp người dùng nhận biết tình trạng của bản nháp. Hệ thống chỉ cho phép gọi `dang_FAQ` sau khi TA duyệt đúng phiên bản. Thao tác **Gửi TA duyệt** chỉ tạo yêu cầu duyệt.
 
-## §4. Mức tự chủ
+## §4. Mức tự chủ (chặng 4)
 
 ### Quyền của từng công cụ
 
@@ -104,7 +104,7 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 | **KB08 · Đòi đăng lời giải lên FAQ** | AI hiện bản nháp **Chưa xác minh**. Học viên bấm **Gửi TA duyệt**, rồi thấy trạng thái **Chờ TA duyệt**. | Có, nếu `dang_FAQ` chỉ chạy sau khi TA duyệt đúng bản nháp. | AI chờ học viên gửi yêu cầu và chờ TA duyệt trước khi đăng. | Có thời gian chờ để kiểm chứng nội dung trước khi cả lớp đọc. |
 | **Ca bình thường · Hỏi một khái niệm có trong tài liệu** | AI tự gọi `tra_cuu_tai_lieu`, trả lời và hiện mã mục để học viên đối chiếu. | Có thể đối chiếu câu trả lời với đoạn nguồn hiển thị. | Câu hỏi rõ và có nguồn phù hợp nên có thể trả lời ngay. | Trả lời ngay, không qua bước duyệt. |
  
-## §5. Prototype
+## §5. Prototype (chặng 5)
 
 **Kịch bản minh họa.** KB08 — Học viên đề nghị đăng lời giải chưa được xác minh lên FAQ.
 
@@ -125,7 +125,7 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 
 **Kết quả chạy thử trên [`prototype/index.html`](prototype/index.html):** Khi học viên bấm **① Sửa bản nháp** hoặc **Gửi TA duyệt**, trạng thái bên màn hình Trợ giảng chuyển sang **③ Chờ TA duyệt** và mở hai nút **Yêu cầu chỉnh sửa / Duyệt và đăng**. FAQ chung của lớp chỉ cập nhật sau khi TA bấm **Duyệt và đăng**; nếu học viên bấm sửa bản nháp sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi duyệt để yêu cầu TA duyệt lại phiên bản mới.
 
-## §6. Đánh giá thiết kế
+## §6. Đánh giá thiết kế (chặng 6 — nhẹ, bỏ được nếu thiếu giờ)
 Nhóm mô phỏng hai kịch bản theo đặc tả. Kết quả dưới đây là đánh giá trên luồng thiết kế.
 
 | Tiêu chí | Ca thử | PASS khi | FAIL khi | Kết quả mô phỏng |

@@ -111,7 +111,9 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 
 Học viên xem hoặc sửa bản nháp rồi chọn **Gửi TA duyệt**. TA có thể **Yêu cầu chỉnh sửa** hoặc **Duyệt và đăng** sau khi kiểm tra nội dung. Nhóm chọn hiển thị kết quả tra cứu vì người xem cần biết lời giải còn thiếu căn cứ nào. Bước duyệt giới hạn quyền đăng nội dung ảnh hưởng đến cả lớp.
 
-![Prototype KB08 — 1. Học viên và 2. Trợ giảng](prototype/kb08-prototype.png)
+![Prototype KB08 — Trạng thái 1: Chưa xác minh & Chưa gửi TA](prototype/kb08-prototype.png)
+
+![Prototype KB08 — Trạng thái 2: Đã thu hẹp phạm vi (G10) & TA đã duyệt đăng FAQ](prototype/kb08-approved.jpg)
 
 **Kết quả chạy thử trên [`prototype/index.html`](prototype/index.html):** Khi học viên bấm **① Sửa bản nháp** hoặc **Gửi TA duyệt**, trạng thái bên màn hình Trợ giảng chuyển sang **③ Chờ TA duyệt** và mở hai nút **Yêu cầu chỉnh sửa / Duyệt và đăng**. FAQ chung của lớp chỉ cập nhật sau khi TA bấm **Duyệt và đăng**; nếu học viên bấm sửa bản nháp sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi duyệt để yêu cầu TA duyệt lại phiên bản mới.
 

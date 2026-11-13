@@ -6,7 +6,9 @@ Prototype tập trung vào kịch bản khó nhất **KB08 (Học viên yêu c�
 - **Chạy trực tiếp trên trình duyệt:** Mở file [`index.html`](index.html) bằng Chrome/Safari/Edge.
 
 ## Ảnh màn hình đánh số (dùng trong `spec.md` §5)
-![Prototype KB08 — 1. Học viên và 2. Trợ giảng](kb08-prototype.png)
+![Prototype KB08 — Trạng thái 1: Chưa xác minh & Chưa gửi TA](kb08-prototype.png)
+
+![Prototype KB08 — Trạng thái 2: Đã thu hẹp phạm vi (G10) & TA đã duyệt đăng FAQ](kb08-approved.jpg)
 
 1. **① Sửa bản nháp (G9 — Sửa dễ dàng):** Học viên chỉnh nội dung bản nháp trước khi gửi; nếu sửa sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi trạng thái duyệt và yêu cầu TA duyệt lại phiên bản mới.
 2. **② Căn cứ & Nhãn *Chưa xác minh* (PAIR — Giải thích & xây dựng niềm tin):** Hiển thị trung thực kết quả `tra_cuu_tai_lieu` chưa tìm thấy nguồn xác nhận.

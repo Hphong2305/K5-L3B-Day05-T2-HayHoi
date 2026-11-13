@@ -117,15 +117,46 @@ Học viên xem hoặc sửa bản nháp rồi chọn **Gửi TA duyệt**. TA c
 
 **Kết quả chạy thử trên [`prototype/index.html`](prototype/index.html):** Khi học viên bấm **① Sửa bản nháp** hoặc **Gửi TA duyệt**, trạng thái bên màn hình Trợ giảng chuyển sang **③ Chờ TA duyệt** và mở hai nút **Yêu cầu chỉnh sửa / Duyệt và đăng**. FAQ chung của lớp chỉ cập nhật sau khi TA bấm **Duyệt và đăng**; nếu học viên bấm sửa bản nháp sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi duyệt để yêu cầu TA duyệt lại phiên bản mới.
 
-## §6. Tiêu chí đánh giá
+## 6. Đánh giá thiết kế (Evaluation)
 
-| Tiêu chí | Kịch bản | Điều kiện đạt |
+### 6.1. Ba tiêu chí Pass/Fail
+
+Nhóm xác định ba điều kiện quan trọng nhất để có thể đưa chức năng đăng FAQ cho người dùng thật:
+
+| Tiêu chí | PASS khi | FAIL khi |
 |---|---|---|
-| Gợi ý đúng phạm vi | KB07 | Khi thiếu thông tin, AI hỏi học viên đang mắc ở đâu. Khi đủ thông tin, AI chỉ đưa một gợi ý cho bước đó. |
-| Minh bạch về nguồn | KB08 | Khi tra cứu chưa tìm được căn cứ, bản nháp hiện **Chưa xác minh** và giải thích tình trạng nguồn. |
-| Kiểm soát quyền đăng | KB08 | Gửi duyệt hoặc yêu cầu chỉnh sửa đều chưa làm FAQ cập nhật. Chỉ đăng sau khi TA duyệt đúng phiên bản. |
+| **TC01 – Minh bạch về nguồn** | Bản nháp chưa có nguồn xác nhận phải hiển thị rõ trạng thái "Chưa xác minh" và thông tin căn cứ. | Hệ thống trình bày nội dung chưa xác minh như kiến thức đã được kiểm chứng. |
+| **TC02 – Kiểm soát quyền đăng** | Học viên chỉ được sửa bản nháp hoặc gửi TA duyệt. Chỉ TA có quyền duyệt và đăng FAQ. | Học viên hoặc AI có thể tự đăng FAQ khi chưa được TA phê duyệt. |
+| **TC03 – Kiểm soát phiên bản** | Khi bản nháp thay đổi sau khi được duyệt, phiên bản mới phải được TA duyệt lại trước khi đăng. | Nội dung bị chỉnh sửa vẫn được đăng dựa trên phê duyệt của phiên bản cũ. |
 
-[Kết quả kiểm tra và lỗi còn lại: bổ sung sau khi chạy thử.]
+Các tiêu chí đều có điều kiện quan sát được trên giao diện, giúp người ngoài nhóm có thể chấm PASS/FAIL theo cùng một quy tắc.
+
+### 6.2. Kết quả đánh giá thiết kế
+
+**Kịch bản KB08 – Học viên yêu cầu đăng lời giải chưa xác minh lên FAQ.**
+
+| Tiêu chí | Kết quả | Bằng chứng trong thiết kế |
+|---|---|---|
+| TC01 – Minh bạch về nguồn | **PASS** | Giao diện hiển thị "Chưa xác minh" và "Chưa tìm thấy nguồn xác nhận". |
+| TC02 – Kiểm soát quyền đăng | **PASS** | Học viên có nút "Gửi TA duyệt"; TA có nút "Duyệt và đăng". |
+| TC03 – Kiểm soát phiên bản | **PASS về thiết kế** | Quy tắc thiết kế yêu cầu duyệt lại khi nội dung thay đổi; chưa có đủ bằng chứng kiểm thử toàn bộ cơ chế phiên bản. |
+
+**Kết quả:** KB08 đạt 2/3 tiêu chí có bằng chứng giao diện trực tiếp; tiêu chí thứ ba đạt ở mức thiết kế nhưng chưa được xác nhận đầy đủ bằng thao tác kiểm thử.
+
+### 6.3. Lỗi còn lại
+
+- Prototype sử dụng dữ liệu mock, chưa kết nối AI và hệ thống FAQ thật.
+- Quyền TA được mô phỏng trên giao diện, chưa có xác thực và phân quyền phía máy chủ.
+- Chưa có bằng chứng kiểm thử đầy đủ cơ chế khóa phiên bản sau khi TA duyệt.
+- Chưa đánh giá kịch bản đắt thứ hai do phạm vi thực hiện hiện tại chỉ tập trung vào KB08.
+
+### 6.4. Kết luận
+
+Thiết kế KB08 đã thể hiện được nguyên tắc minh bạch và kiểm soát của con người đối với việc công bố nội dung AI tạo ra.
+
+Nhóm có thể sử dụng prototype để minh họa quy trình học viên gửi bản nháp và TA phê duyệt, nhưng chưa đủ căn cứ để đưa chức năng vào vận hành thực tế.
+
+Phần đánh giá hiện mới bao phủ KB08, chưa đáp ứng đầy đủ yêu cầu chấm trên hai kịch bản đắt nhất của đề bài.
 
 ## §7. Demo
 

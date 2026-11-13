@@ -146,14 +146,11 @@ Các tiêu chí đều có điều kiện quan sát được trên giao diện, 
 ### 6.3. Lỗi còn lại
 
 - Prototype sử dụng dữ liệu mock, chưa kết nối AI và hệ thống FAQ thật.
-- Quyền TA được mô phỏng trên giao diện, chưa có xác thực và phân quyền phía máy chủ.
 - Chưa có bằng chứng kiểm thử đầy đủ cơ chế khóa phiên bản sau khi TA duyệt.
 
 ### 6.4. Kết luận
 
 Thiết kế KB08 đã thể hiện được nguyên tắc minh bạch và kiểm soát của con người đối với việc công bố nội dung AI tạo ra.
-
-Nhóm có thể sử dụng prototype để minh họa quy trình học viên gửi bản nháp và TA phê duyệt, nhưng chưa đủ căn cứ để đưa chức năng vào vận hành thực tế.
 
 
 ## §7. Demo

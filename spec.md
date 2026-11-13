@@ -36,6 +36,13 @@
 - Chọn KB07 vì khi lời giải đầy đủ đã hiện, học viên không thể quay lại trạng thái chưa thấy đáp án. Nếu họ chép để nộp, bài làm cũng khó phản ánh mức hiểu thực tế.
 - KB06 suýt được chọn vì học viên có thể lỡ hạn nộp. Nhóm ưu tiên KB07 và KB08 vì chúng gắn trực tiếp với các tool của tính năng và minh họa hai hậu quả khác nhau trong giáo dục. Với KB06, hệ thống có thể chặn lời hứa nộp bài ngay khi nhận ra yêu cầu nằm ngoài khả năng.
 ## §3. Khi AI sai  (chặng 3)
+Với mỗi kịch bản đắt nhất:
+- AI nói gì (nguyên văn) · người dùng thấy gì · làm gì tiếp · ai được báo, sau bao lâu.
+- Quyết định: hỏi lại / trả lời kèm giới hạn / dừng và chuyển người — chọn cách nào, đã loại cách nào, vì sao.
+- Loại lỗi (hệ thống / người dùng / ngữ cảnh) và vì sao cách nói, cách sửa đi theo loại đó.
+- 2–3 nguyên tắc HAX/PAIR, mỗi cái trỏ vào một chỗ cụ thể (câu chữ hoặc chỗ trên màn hình).
+- Lỗi nào sửa câu chữ không cứu được (nếu có), và thiết kế cứu nó thế nào.
+
 KB07 — Học viên xin toàn bộ lời giải để nộp
 | Mục | Nội dung mẫu |
 |---|---|
@@ -45,7 +52,6 @@ KB07 — Học viên xin toàn bộ lời giải để nộp
 | **Người dùng làm gì tiếp?** | Gửi đề hoặc bước đã làm. Nếu chưa phản hồi, hệ thống giữ nguyên câu hỏi làm rõ. |
 | **Ai được báo, khi nào?** | Ca này được xử lý ngay trong chat. Nếu học viên chọn **Hỏi TA**, câu hỏi và phần bài làm họ chọn chia sẻ được chuyển lúc bấm gửi. |
 | **Vì sao chọn cách này?** | **Hỏi lại một câu** giúp xác định chỗ vướng để đưa gợi ý vừa đủ. Gợi ý ngay có thể lệch bước học viên đang làm. Chuyển TA ngay sẽ khiến học viên phải chờ trong khi họ có thể tiếp tục với một gợi ý ngắn. |
-
 
 KB08 — Học viên yêu cầu đăng lời giải chưa kiểm chứng lên FAQ
 | Mục | Nội dung mẫu |
@@ -58,16 +64,25 @@ KB08 — Học viên yêu cầu đăng lời giải chưa kiểm chứng lên FA
 | **Vì sao chọn cách này?** | **Chuyển TA kiểm tra** vì nội dung đăng sẽ ảnh hưởng tới cả lớp. Hỏi lại học viên có thể làm rõ ý định đăng, nhưng vẫn thiếu người kiểm chứng lời giải. Hiện cảnh báo giúp học viên hiểu rủi ro, còn bước duyệt mới kiểm soát được việc đăng. |
 
 
-Gắn 3 nguyên tắc HAX/PAIR vào màn hình
+- Gắn 3 nguyên tắc HAX/PAIR vào màn hình
 Nguyên tắc	Vị trí cụ thể trong prototype
 G10 — Thu hẹp phạm vi khi nghi ngờ	Ô Nhập bước bạn đang mắc ở KB07 giúp AI chỉ gợi ý đúng bước học viên cần.
 G9 — Sửa dễ dàng	Nút Sửa bản nháp ở KB08 cho phép chỉnh nội dung trước khi gửi TA.
 PAIR — Giải thích và xây dựng niềm tin	Mục Căn cứ ở KB08 cho biết lời giải đã có nguồn xác nhận hay vẫn cần kiểm tra.
 
-
-Lỗi cần chặn bằng thiết kế. Ở KB08, dù AI đã hiện nhãn Chưa xác minh, lời giải vẫn có thể lan ra cả lớp nếu hệ thống cho phép gọi dang_FAQ ngay. Vì vậy, prototype cần tách hai thao tác Gửi TA duyệt và Đăng FAQ. Nút gửi duyệt chỉ đổi trạng thái sang Chờ TA duyệt. FAQ chỉ cập nhật sau khi TA xác nhận.
+- Lỗi cần chặn bằng thiết kế. Ở KB08, dù AI đã hiện nhãn Chưa xác minh, lời giải vẫn có thể lan ra cả lớp nếu hệ thống cho phép gọi dang_FAQ ngay. Vì vậy, prototype cần tách hai thao tác Gửi TA duyệt và Đăng FAQ. Nút gửi duyệt chỉ đổi trạng thái sang Chờ TA duyệt. FAQ chỉ cập nhật sau khi TA xác nhận.
 
 ## §4. Mức tự chủ  (chặng 4)
+Với mỗi tool:
+- Mức của nhóm (tự làm / cần người duyệt / cấm). Nếu cần người duyệt: ai duyệt · người duyệt thấy gì · quá hạn thì sao.
+- Lý do theo cost-of-error: sai thì ai chịu gì · đảo lại được không · chờ người thì mất gì.
+- Phương án đã cân nhắc và vì sao loại.
+Thêm:
+- Tool khó xếp nhất: mỗi người từng chọn gì, cái giá của mỗi phía (trỏ về kịch bản ở §2), nhóm chốt thế nào.
+- Thử mức đã đặt trên 2 kịch bản đắt nhất + 1 kịch bản bình thường: cái sai có bị chặn không? còn việc nào làm khi lẽ ra phải hỏi? người dùng bình thường có phải chờ vô ích không?
+- Luật thêm hoặc tool tách bước (nếu có), và vì sao.
+- Một mức tự chủ đã đổi lời hứa nào với người dùng.
+
 1. Xếp quyền cho cả 4 tool
    
 | Tool | Mức tự chủ đề xuất | Lý do và phương án đã cân nhắc |

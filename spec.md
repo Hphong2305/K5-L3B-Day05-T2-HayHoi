@@ -107,10 +107,11 @@ Lời hứa trên giao diện: “Mình có thể chuẩn bị bản nháp FAQ. 
 | ① | **Sửa bản nháp** | HAX G9 — Học viên chỉnh nội dung trước khi gửi duyệt. |
 | ② | **Căn cứ** | PAIR — Giao diện cho biết AI đã tự tra cứu và chưa tìm thấy nguồn xác nhận. |
 | ③ | **Chờ TA duyệt** | Bản nháp chờ TA kiểm tra. FAQ chỉ cập nhật sau khi TA chọn **Duyệt và đăng**. |
+| ④ | **Thu hẹp phạm vi (G10)** | HAX G10 — Học viên chọn buổi học để tra cứu lại khi câu hỏi ban đầu thiếu ngữ cảnh hoặc chưa tìm thấy nguồn. |
 
 Học viên xem hoặc sửa bản nháp rồi chọn **Gửi TA duyệt**. TA có thể **Yêu cầu chỉnh sửa** hoặc **Duyệt và đăng** sau khi kiểm tra nội dung. Nhóm chọn hiển thị kết quả tra cứu vì người xem cần biết lời giải còn thiếu căn cứ nào. Bước duyệt giới hạn quyền đăng nội dung ảnh hưởng đến cả lớp.
 
-![Prototype KB08 — 1. Học viên và 2. Trợ giảng](prototype/kb08-prototype.jpg)
+![Prototype KB08 — 1. Học viên và 2. Trợ giảng](prototype/kb08-prototype.png)
 
 **Kết quả chạy thử trên [`prototype/index.html`](prototype/index.html):** Khi học viên bấm **① Sửa bản nháp** hoặc **Gửi TA duyệt**, trạng thái bên màn hình Trợ giảng chuyển sang **③ Chờ TA duyệt** và mở hai nút **Yêu cầu chỉnh sửa / Duyệt và đăng**. FAQ chung của lớp chỉ cập nhật sau khi TA bấm **Duyệt và đăng**; nếu học viên bấm sửa bản nháp sau khi đã gửi hoặc đã duyệt, hệ thống tự thu hồi duyệt để yêu cầu TA duyệt lại phiên bản mới.
 

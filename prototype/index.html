@@ -820,6 +820,16 @@
               <span><strong>Căn cứ:</strong> ${escapeHtml(state.grounding)}</span>
             </div>
 
+            <!-- G10: Thu hẹp phạm vi khi nghi ngờ -->
+            <div class="scope-row">
+              <span><span class="num-badge">4</span> <strong>Thu hẹp phạm vi (G10):</strong></span>
+              <select class="scope-select" onchange="narrowScopeLookup(this.value)">
+                <option value="" ${state.selectedSession === "" ? "selected" : ""}>-- Chọn buổi học để tra lại --</option>
+                <option value="Buổi 2" ${state.selectedSession === "Buổi 2" ? "selected" : ""}>Buổi 2 (Trực quan hóa)</option>
+                <option value="Buổi 3" ${state.selectedSession === "Buổi 3" ? "selected" : ""}>Buổi 3 (Mean vs Median)</option>
+              </select>
+            </div>
+
             ${state.status === "CHO_TA_DUYET" ? `
               <div class="feedback-msg feedback-info">
                 ⏳ Đã gửi sang hàng đợi TA (v${state.version}). FAQ của lớp chỉ cập nhật sau khi TA duyệt.
